@@ -2,9 +2,10 @@
   // Wait until app is ready...
   // Is there a better way to do this?
   await new Promise((resolve) => {
-    if (window.app) resolve(window.app)
+    const checkApp = () => !!(window.app && window.app.plugins && window.app.plugins.plugins)
+    if (checkApp()) resolve(window.app)
     const interval = setInterval(() => {
-      if (window.app) {
+      if (checkApp()) {
         clearInterval(interval)
         resolve(window.app)
       }

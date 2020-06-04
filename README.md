@@ -16,4 +16,4 @@ Then, run `volcano` to inject the plugin loader into the Obsidian executable. Yo
 
 ## Plugins
 
-Plugins are stored in the form of JavaScript files in the `~/volcano/plugins/` directory. See the wiki (TODO) for more information on writing plugins.
+Plugins are stored in the form of JavaScript files in the `~/volcano/plugins/` directory. Check out the [wiki](https://github.com/kognise/volcano/wiki) for more information on writing plugins.
