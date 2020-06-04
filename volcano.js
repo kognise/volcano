@@ -54,6 +54,7 @@
 
   const pluginFiles = await fs.promises.readdir(pluginsPath)
   for (let pluginFile of pluginFiles) {
+    if (!pluginFile.endsWith('.js')) continue
     loadPlugin(pluginFile)
   }
 
