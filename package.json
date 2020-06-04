@@ -12,6 +12,7 @@
   "dependencies": {
     "asar": "^3.0.3",
     "chalk": "^4.0.0",
-    "prompts": "^2.3.2"
+    "prompts": "^2.3.2",
+    "semver-sort": "^0.0.4"
   }
 }
