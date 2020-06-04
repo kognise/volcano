@@ -1,8 +1,8 @@
 {
-  "name": "volcano",
+  "name": "@kognise/volcano",
   "version": "0.0.1",
   "description": "A plugin loader and injector for Obsidian",
-  "main": "index.js",
+  "bin": { "volcano" : "./index.js" },
   "repository": "https://github.com/kognise/volcano.git",
   "author": "Felix Mattick <felix.mattick@gmail.com>",
   "license": "UNLICENSED",
