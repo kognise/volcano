@@ -1,6 +1,6 @@
 {
-  "name": "@kognise/volcano",
-  "version": "0.0.3",
+  "name": "volcano",
+  "version": "1.0.0",
   "description": "A shitty plugin loader for Obsidian",
   "bin": {
     "volcano": "./index.js"

@@ -9,7 +9,7 @@ I hacked this together in a few hours because there's currently no way to load y
 Until I stop being lazy and add packing, you'll need [Node.js](https://nodejs.org/) to install Volcano. Once it's installed, run the following in a terminal:
 
 ```
-npm install -g @kognise/volcano
+npm install -g volcano
 ```
 
 Then, run `volcano` to inject the plugin loader into the Obsidian executable. You'll have to re-run this whenever Obsidian updates.
