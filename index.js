@@ -18,6 +18,9 @@ const patchAsar = async (asarPath) => {
   await fs.promises.writeFile(indexPath, indexContent.toString().replace(
     '<script type="text/javascript" src="app.js"></script></body>',
     '<script type="text/javascript" src="app.js"></script><script type="text/javascript" src="volcano.js"></script></body>'
+  ).replace(
+    `script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';`,
+    `script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';`
   ))
 
   const volcanoContent = await fs.promises.readFile(require.resolve('./volcano.js'))
