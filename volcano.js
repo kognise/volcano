@@ -36,8 +36,8 @@
 
       app.plugins.loadPlugin(plugin)
 
-      if (plugin.defaultOn && !plugin.enabled) {
-        log(`Enabling ${pluginFile} because defaultOn is truthy`)
+      if ((plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.name]) && !plugin.enabled) {
+        log(`Enabling ${pluginFile}`)
         findPlugin(plugin.id).enable(app)
       }
 
