@@ -19,8 +19,8 @@ const patchAsar = async (asarPath) => {
     '<script type="text/javascript" src="app.js"></script></body>',
     '<script type="text/javascript" src="app.js"></script><script type="text/javascript" src="volcano.js"></script></body>'
   ).replace(
-    `script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';`,
-    `script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';`
+    `script-src 'self' 'unsafe-inline' blob:; frame-src 'self' https://*:*; style-src 'self' 'unsafe-inline';`,
+    `script-src * 'unsafe-inline' 'unsafe-eval' blob:; frame-src 'self' https://*:*; style-src * 'unsafe-inline';`
   ))
 
   const volcanoContent = await fs.promises.readFile(require.resolve('./volcano.js'))
@@ -61,6 +61,10 @@ const getInitialAsarPath = async () => {
     if (latestAsarPath) return path.join(asPath, latestAsarPath)
 
     return path.resolve(process.env.APPDATA, '..\\Local\\Obsidian\\resources')
+  } else if (process.platform === 'linux') {
+    const asPath = path.join(process.env.HOME, '.config/obsidian')
+    const latestAsarPath = await getLatestAsarPath(asPath)
+    if (latestAsarPath) return path.join(asPath, latestAsarPath)
   }
 }
 

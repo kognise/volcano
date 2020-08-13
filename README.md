@@ -1,6 +1,6 @@
 # Volcano
 
-A shitty plugin loader for [Obsidian](https://obsidian.md/). **No Linux support currently.**
+A shitty plugin loader for [Obsidian](https://obsidian.md/).
 
 I hacked this together in a few hours because there's currently no way to load your own plugins, I'll probably archive this when the awesome Obsidian team opens up an official API.
 

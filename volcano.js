@@ -19,24 +19,27 @@
   const volcanoPath = path.join(electron.remote.app.getPath('home'), 'volcano')
   const pluginsPath = path.join(volcanoPath, 'plugins')
 
+  const SettingTab = app.plugins.getPluginById('daily-notes').settingTab.constructor
+
   const log = (message, error) => {
     console.log(`%c[Volcano]%c ${message}`, `color: ${error ? '#fa5252' : '#228be6'};`, '')
     if (error && typeof error !== 'boolean') console.error(error)
   }
 
-  const findPlugin = (id) => app.plugins.plugins.find((plugin) => plugin.plugin.id === id)
+  const findPlugin = (id) => {
+    console.warn('Volcano warning: please use app.plugins.getPluginById instead of findPlugin.')
+    return app.plugins.getPluginById(id)
+  }
 
   const loadPlugin = (pluginFile) => {
     log(`Loading ${pluginFile}...`)
     try {
       const getPlugin = require(path.join(pluginsPath, pluginFile))
-
-      const SettingTab = findPlugin('daily-notes').settingTab.constructor
       const plugin = getPlugin({ findPlugin, SettingTab })
 
       app.plugins.loadPlugin(plugin)
 
-      if ((plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.name]) && !plugin.enabled) {
+      if ((plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) && !plugin.enabled) {
         log(`Enabling ${pluginFile}`)
         findPlugin(plugin.id).enable(app)
       }
