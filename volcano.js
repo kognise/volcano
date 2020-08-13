@@ -41,7 +41,7 @@
 
       if ((plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) && !plugin.enabled) {
         log(`Enabling ${pluginFile}`)
-        findPlugin(plugin.id).enable(app)
+        app.plugins.getPluginById(plugin.id).enable(app)
       }
 
       log(`Loaded ${pluginFile}`)
