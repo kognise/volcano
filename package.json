@@ -1,9 +1,12 @@
 {
   "name": "volcano",
-  "version": "1.0.6",
-  "description": "A shitty plugin loader for Obsidian",
+  "version": "1.0.7",
+  "description": "An okay plugin loader for Obsidian",
   "bin": {
     "volcano": "./index.js"
+  },
+  "scripts": {
+    "build": "parcel build volcano.js --target node --bundle-node-modules "
   },
   "repository": "https://github.com/kognise/volcano.git",
   "author": "Felix Mattick <felix.mattick@gmail.com>",
@@ -12,7 +15,11 @@
   "dependencies": {
     "asar": "^3.0.3",
     "chalk": "^4.0.0",
+    "globby": "^11.0.1",
     "prompts": "^2.3.2",
     "semver-sort": "^0.0.4"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }

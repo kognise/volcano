@@ -30,7 +30,7 @@ const patchAsar = async (asarPath) => {
   );
 
   const volcanoContent = await fs.promises.readFile(
-    require.resolve("./volcano.js")
+    require.resolve("./dist/volcano.js")
   );
   await fs.promises.writeFile(
     path.join(asarExtractTemp, "volcano.js"),
@@ -82,7 +82,7 @@ const getInitialAsarPath = async () => {
   }
 };
 
-const go = async () => {
+(async () => {
   const response = await prompts({
     type: "text",
     name: "asarPath",
@@ -95,6 +95,4 @@ const go = async () => {
   console.log(chalk.blue("Patching asar..."));
   await patchAsar(response.asarPath);
   console.log(chalk.green("Done! Launch Obsidian to get started."));
-};
-
-go();
+})();
