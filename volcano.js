@@ -19,6 +19,28 @@ const findPlugin = (id) => {
   return app.plugins.getPluginById(id);
 };
 
+const loadPlugin = (pluginFile) => {
+  log(`Loading ${pluginFile}...`);
+  try {
+    const getPlugin = require(path.join(pluginsPath, pluginFile));
+    const plugin = getPlugin({ findPlugin, SettingTab });
+
+    app.plugins.loadPlugin(plugin);
+
+    if (
+      (plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) &&
+      !plugin.enabled
+    ) {
+      log(`Enabling ${pluginFile}`);
+      app.plugins.getPluginById(plugin.id).enable(app);
+    }
+
+    log(`Loaded ${pluginFile}`);
+  } catch (error) {
+    log(`Error loading ${pluginFile}`, error);
+  }
+};
+
 const loadPluginFromManifest = (pluginManifestFile) => {
   log(`Loading ${pluginManifestFile}...`);
   try {
