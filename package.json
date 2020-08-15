@@ -6,7 +6,9 @@
     "volcano": "./index.js"
   },
   "scripts": {
-    "style": "prettier --write ."
+    "style": "prettier --write .",
+    "build": "parcel build volcano.js --no-source-maps --target node --bundle-node-modules",
+    "prepack": "yarn build"
   },
   "repository": "https://github.com/kognise/volcano.git",
   "author": "Felix Mattick <felix.mattick@gmail.com>",
@@ -15,10 +17,12 @@
   "dependencies": {
     "asar": "^3.0.3",
     "chalk": "^4.0.0",
+    "globby": "^11.0.1",
     "prompts": "^2.3.2",
     "semver-sort": "^0.0.4"
   },
   "devDependencies": {
+    "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5"
   }
 }
