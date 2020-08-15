@@ -22,7 +22,7 @@ const findPlugin = (id) => {
 const loadPlugin = (pluginFile) => {
   log(`Loading ${pluginFile}...`);
   try {
-    const getPlugin = require(path.join(pluginsPath, pluginFile));
+    const getPlugin = require(pluginFile);
     const plugin = getPlugin({ findPlugin, SettingTab });
 
     app.plugins.loadPlugin(plugin);
@@ -45,29 +45,9 @@ const loadPluginFromManifest = (pluginManifestFile) => {
   log(`Loading ${pluginManifestFile}...`);
   try {
     const manifest = require(pluginManifestFile);
-    const getPlugin = require(path.join(
-      pluginManifestFile,
-      "..",
-      manifest.main
-    ));
-
-    const SettingTab = app.plugins.getPluginById("daily-notes").settingTab
-      .constructor;
-
-    const plugin = getPlugin({ findPlugin, SettingTab });
-    app.plugins.loadPlugin(plugin);
-
-    if (
-      (plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) &&
-      !plugin.enabled
-    ) {
-      log(`Enabling ${manifest.name}`);
-      app.plugins.getPluginById(plugin.id).enable(app);
-    }
-
-    log(`Loaded ${manifest.name}`);
+    loadPlugin(path.join(pluginManifestFile, "..", manifest.main));
   } catch (error) {
-    log(`Error loading ${manifest.name}`, error);
+    log(`Error loading ${pluginManifestFile}`, error);
   }
 };
 
@@ -98,7 +78,7 @@ const loadPluginFromManifest = (pluginManifestFile) => {
   const singleFilePluginFiles = await fs.promises.readdir(pluginsPath);
   for (let pluginFile of singleFilePluginFiles) {
     if (!pluginFile.endsWith(".js")) continue;
-    loadPlugin(pluginFile);
+    loadPlugin(path.join(pluginsPath, pluginFile));
   }
 
   // Support plugins inside their own directories
