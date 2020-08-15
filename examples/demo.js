@@ -47,7 +47,9 @@ module.exports = ({ SettingTab }) => {
       this.app = app
       this.instance = instance
 
-      this.instance.registerRibbonAction('Test ribbon', 'dice', () => this.onTrigger())
+      this.instance.registerRibbonAction('Test ribbon', 'dice', () =>
+        this.onTrigger()
+      )
 
       this.instance.registerGlobalCommand({
         id: 'test',
@@ -59,9 +61,9 @@ module.exports = ({ SettingTab }) => {
     }
 
     async onEnable() {
-			const options = await this.instance.loadData()
-			this.options = options || {}
-		}
+      const options = await this.instance.loadData()
+      this.options = options || {}
+    }
 
     onTrigger() {
       alert(`You clicked me! My setting is set to "${this.options.test}"`)

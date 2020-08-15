@@ -21,9 +21,7 @@ class WordCountPlugin {
   }
 
   onEnable({ workspace }, instance) {
-    instance.registerEvent(
-      workspace.on('file-open', this.onFileOpen, this)
-    )
+    instance.registerEvent(workspace.on('file-open', this.onFileOpen, this))
 
     instance.registerEvent(
       workspace.on('quick-preview', this.onQuickPreview, this)

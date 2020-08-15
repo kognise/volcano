@@ -1,8 +1,9 @@
-(async () => {
+;(async () => {
   // Wait until app is ready...
   // Is there a better way to do this?
   await new Promise((resolve) => {
-    const checkApp = () => !!(window.app && window.app.plugins && window.app.plugins.plugins)
+    const checkApp = () =>
+      !!(window.app && window.app.plugins && window.app.plugins.plugins)
     if (checkApp()) resolve(window.app)
     const interval = setInterval(() => {
       if (checkApp()) {
@@ -10,7 +11,7 @@
         resolve(window.app)
       }
     }, 200)
-  }) 
+  })
 
   const electron = require('electron')
   const fs = require('fs')
@@ -19,15 +20,22 @@
   const volcanoPath = path.join(electron.remote.app.getPath('home'), 'volcano')
   const pluginsPath = path.join(volcanoPath, 'plugins')
 
-  const SettingTab = app.plugins.getPluginById('daily-notes').settingTab.constructor
+  const SettingTab = app.plugins.getPluginById('daily-notes').settingTab
+    .constructor
 
   const log = (message, error) => {
-    console.log(`%c[Volcano]%c ${message}`, `color: ${error ? '#fa5252' : '#228be6'};`, '')
+    console.log(
+      `%c[Volcano]%c ${message}`,
+      `color: ${error ? '#fa5252' : '#228be6'};`,
+      ''
+    )
     if (error && typeof error !== 'boolean') console.error(error)
   }
 
   const findPlugin = (id) => {
-    console.warn('Volcano warning: please use app.plugins.getPluginById instead of findPlugin.')
+    console.warn(
+      'Volcano warning: please use app.plugins.getPluginById instead of findPlugin.'
+    )
     return app.plugins.getPluginById(id)
   }
 
@@ -39,7 +47,10 @@
 
       app.plugins.loadPlugin(plugin)
 
-      if ((plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) && !plugin.enabled) {
+      if (
+        (plugin.defaultOn || app.vault.config.pluginEnabledStatus[plugin.id]) &&
+        !plugin.enabled
+      ) {
         log(`Enabling ${pluginFile}`)
         app.plugins.getPluginById(plugin.id).enable(app)
       }

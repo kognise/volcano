@@ -5,6 +5,9 @@
   "bin": {
     "volcano": "./index.js"
   },
+  "scripts": {
+    "style": "prettier --write ."
+  },
   "repository": "https://github.com/kognise/volcano.git",
   "author": "Felix Mattick <felix.mattick@gmail.com>",
   "license": "UNLICENSED",
@@ -14,5 +17,8 @@
     "chalk": "^4.0.0",
     "prompts": "^2.3.2",
     "semver-sort": "^0.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }

@@ -7,7 +7,7 @@ const prompts = require('prompts')
 const chalk = require('chalk')
 const semverSort = require('semver-sort')
 
-const tempPrefix = 'volcano-temp-' 
+const tempPrefix = 'volcano-temp-'
 
 const patchAsar = async (asarPath) => {
   const asarExtractTemp = await fs.promises.mkdtemp(tempPrefix)
@@ -15,16 +15,27 @@ const patchAsar = async (asarPath) => {
 
   const indexPath = path.join(asarExtractTemp, 'index.html')
   const indexContent = await fs.promises.readFile(indexPath)
-  await fs.promises.writeFile(indexPath, indexContent.toString().replace(
-    '<script type="text/javascript" src="app.js"></script></body>',
-    '<script type="text/javascript" src="app.js"></script><script type="text/javascript" src="volcano.js"></script></body>'
-  ).replace(
-    `script-src 'self' 'unsafe-inline' blob:; frame-src 'self' https://*:*; style-src 'self' 'unsafe-inline';`,
-    `script-src * 'unsafe-inline' 'unsafe-eval' blob:; frame-src 'self' https://*:*; style-src * 'unsafe-inline';`
-  ))
+  await fs.promises.writeFile(
+    indexPath,
+    indexContent
+      .toString()
+      .replace(
+        '<script type="text/javascript" src="app.js"></script></body>',
+        '<script type="text/javascript" src="app.js"></script><script type="text/javascript" src="volcano.js"></script></body>'
+      )
+      .replace(
+        `script-src 'self' 'unsafe-inline' blob:; frame-src 'self' https://*:*; style-src 'self' 'unsafe-inline';`,
+        `script-src * 'unsafe-inline' 'unsafe-eval' blob:; frame-src 'self' https://*:*; style-src * 'unsafe-inline';`
+      )
+  )
 
-  const volcanoContent = await fs.promises.readFile(require.resolve('./volcano.js'))
-  await fs.promises.writeFile(path.join(asarExtractTemp, 'volcano.js'), volcanoContent)
+  const volcanoContent = await fs.promises.readFile(
+    require.resolve('./volcano.js')
+  )
+  await fs.promises.writeFile(
+    path.join(asarExtractTemp, 'volcano.js'),
+    volcanoContent
+  )
 
   await fs.promises.unlink(asarPath)
   await asar.createPackage(asarExtractTemp, asarPath)
@@ -50,7 +61,10 @@ const getLatestAsarPath = async (asPath) => {
 
 const getInitialAsarPath = async () => {
   if (process.platform === 'darwin') {
-    const asPath = path.join(process.env.HOME, 'Library/Application Support/obsidian')
+    const asPath = path.join(
+      process.env.HOME,
+      'Library/Application Support/obsidian'
+    )
     const latestAsarPath = await getLatestAsarPath(asPath)
     if (latestAsarPath) return path.join(asPath, latestAsarPath)
 
