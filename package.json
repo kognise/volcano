@@ -1,6 +1,6 @@
 {
   "name": "volcano",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A shitty plugin loader for Obsidian",
   "bin": {
     "volcano": "./index.js"
