@@ -15,13 +15,20 @@ const patchAsar = async (asarPath) => {
 
   const indexPath = path.join(asarExtractTemp, 'index.html')
   const indexContent = await fs.promises.readFile(indexPath)
+
+  if (indexContent.toString().indexOf('volcano.js') > -1) {
+    console.log('volcano.js is already loaded')
+    await fs.promises.rmdir(asarExtractTemp, { recursive: true })
+    return
+  }
+
   await fs.promises.writeFile(
     indexPath,
     indexContent
       .toString()
       .replace(
-        '<script type="text/javascript" src="app.js"></script></body>',
-        '<script type="text/javascript" src="app.js"></script><script type="text/javascript" src="volcano.js"></script></body>'
+        /\<script type=\"text\/javascript\" src=\"\/?app\.js\"\>\<\/script\>/,
+        '<script type="text/javascript" src="/app.js"></script><script type="text/javascript" src="volcano.js"></script>'
       )
       .replace(
         `script-src 'self' 'unsafe-inline' blob:; frame-src 'self' https://*:*; style-src 'self' 'unsafe-inline';`,
