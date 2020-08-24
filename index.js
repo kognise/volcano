@@ -81,7 +81,7 @@ const getInitialAsarPath = async () => {
     const latestAsarPath = await getLatestAsarPath(asPath)
     if (latestAsarPath) return path.join(asPath, latestAsarPath)
 
-    return path.resolve(process.env.APPDATA, '..\\Local\\Obsidian\\resources')
+    return path.resolve(process.env.APPDATA, '..\\Local\\Obsidian\\resources\\obsidian.asar')
   } else if (process.platform === 'linux') {
     const asPath = path.join(process.env.HOME, '.config/obsidian')
     const latestAsarPath = await getLatestAsarPath(asPath)
