@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
+const rimraf = require('rimraf')
 const asar = require('asar')
 const path = require('path')
 const prompts = require('prompts')
@@ -18,7 +19,7 @@ const patchAsar = async (asarPath) => {
 
   if (indexContent.toString().indexOf('volcano.js') > -1) {
     console.log('volcano.js is already loaded')
-    await fs.promises.rmdir(asarExtractTemp, { recursive: true })
+    rimraf.sync(asarExtractTemp)
     return
   }
 
@@ -47,7 +48,7 @@ const patchAsar = async (asarPath) => {
   await fs.promises.unlink(asarPath)
   await asar.createPackage(asarExtractTemp, asarPath)
 
-  await fs.promises.rmdir(asarExtractTemp, { recursive: true })
+  rimraf.sync(asarExtractTemp)
 }
 
 const getLatestAsarPath = async (asPath) => {
