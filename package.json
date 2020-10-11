@@ -19,14 +19,15 @@
   "license": "UNLICENSED",
   "private": false,
   "dependencies": {
-    "asar": "^3.0.3",
-    "chalk": "^4.0.0",
-    "globby": "^11.0.1",
-    "prompts": "^2.3.2",
-    "semver-sort": "^0.0.4"
+    "asar": "3.0.3",
+    "chalk": "4.0.0",
+    "globby": "11.0.1",
+    "prompts": "2.3.2",
+    "rimraf": "3.0.2",
+    "semver-sort": "0.0.4"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "prettier": "^2.0.5"
+    "parcel-bundler": "1.12.4",
+    "prettier": "2.0.5"
   }
 }
