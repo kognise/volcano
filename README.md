@@ -1,5 +1,5 @@
 > 🚩 **This project is archived!** 🚩
-> s
+> 
 > *I loved working on this project! Luckily, Obsidian now has a native plugin system with a similar API, so it isn't necesary anymore.*
 
 # Volcano
